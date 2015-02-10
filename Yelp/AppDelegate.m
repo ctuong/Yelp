@@ -23,6 +23,13 @@
     RestaurantsViewController *rvc = [[RestaurantsViewController alloc] init];
     UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:rvc];
     
+    UISearchBar *searchBar = [[UISearchBar alloc] init];
+    [searchBar sizeToFit];
+    searchBar.delegate = rvc;
+    nc.navigationBar.topItem.titleView = searchBar;
+    nc.navigationBar.tintColor = [UIColor colorWithRed:1 green:0 blue:0 alpha:1];
+    nc.navigationBar.barTintColor = [UIColor colorWithRed:1 green:0 blue:0 alpha:1];
+    
     self.window.rootViewController = nc;
     
     [self.window makeKeyAndVisible];

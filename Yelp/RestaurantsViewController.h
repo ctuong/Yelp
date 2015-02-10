@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RestaurantsViewController : UIViewController
+@interface RestaurantsViewController : UIViewController <UISearchBarDelegate>
 
 @end

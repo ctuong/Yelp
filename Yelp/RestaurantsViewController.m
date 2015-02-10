@@ -14,7 +14,7 @@ NSString * const kYelpConsumerSecret = @"BLkhdUq6SkdgwFP540tQJoMV9jI";
 NSString * const kYelpToken = @"6gfbfpypucP7zB59tCCVXwJiKeUkj1Nd";
 NSString * const kYelpTokenSecret = @"5A30-BxsK9Ej5mdRg0Y9QJL9eJ8";
 
-@interface RestaurantsViewController ()
+@interface RestaurantsViewController () <UISearchBarDelegate>
 
 @property (nonatomic, strong) YelpClient *client;
 
