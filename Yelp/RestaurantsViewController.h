@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  RestaurantsViewController.h
 //  Yelp
 //
 //  Created by Calvin Tuong on 2/10/15.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface RestaurantsViewController : UIViewController
 
 @end
-
