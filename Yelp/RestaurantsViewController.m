@@ -9,14 +9,14 @@
 #import "RestaurantsViewController.h"
 #import "YelpClient.h"
 
-NSString * const kYelpConsumerKey = @"BgDak75yTFuO536tApDhQQ";
-NSString * const kYelpConsumerSecret = @"BLkhdUq6SkdgwFP540tQJoMV9jI";
-NSString * const kYelpToken = @"6gfbfpypucP7zB59tCCVXwJiKeUkj1Nd";
-NSString * const kYelpTokenSecret = @"5A30-BxsK9Ej5mdRg0Y9QJL9eJ8";
-
 @interface RestaurantsViewController () <UISearchBarDelegate>
 
 @property (nonatomic, strong) YelpClient *client;
+
+@property (nonatomic, strong) NSString *yelpConsumerKey;
+@property (nonatomic, strong) NSString *yelpConsumerSecret;
+@property (nonatomic, strong) NSString *yelpToken;
+@property (nonatomic, strong) NSString *yelpTokenSecret;
 
 @end
 
@@ -24,8 +24,9 @@ NSString * const kYelpTokenSecret = @"5A30-BxsK9Ej5mdRg0Y9QJL9eJ8";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    self.client = [[YelpClient alloc] initWithConsumerKey:kYelpConsumerKey consumerSecret:kYelpConsumerSecret accessToken:kYelpToken accessSecret:kYelpTokenSecret];
+    [self loadYelpConfig];
+    
+    self.client = [[YelpClient alloc] initWithConsumerKey:self.yelpConsumerKey consumerSecret:self.yelpConsumerSecret accessToken:self.yelpToken accessSecret:self.yelpTokenSecret];
     
     [self.client searchWithTerm:@"Thai" success:^(AFHTTPRequestOperation *operation, id response) {
         NSLog(@"response: %@", response);
@@ -37,6 +38,15 @@ NSString * const kYelpTokenSecret = @"5A30-BxsK9Ej5mdRg0Y9QJL9eJ8";
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)loadYelpConfig {
+    NSDictionary *yelpConfig = [[NSDictionary alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"config" ofType:@"plist"]];
+    
+    self.yelpConsumerKey = yelpConfig[@"yelpConsumerKey"];
+    self.yelpConsumerSecret = yelpConfig[@"yelpConsumerSecret"];
+    self.yelpToken = yelpConfig[@"yelpToken"];
+    self.yelpTokenSecret = yelpConfig[@"yelpTokenSecret"];
 }
 
 /*

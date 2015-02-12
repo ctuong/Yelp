@@ -16,6 +16,7 @@
 		EBC24C601A8A0455004F078B /* YelpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = EBC24C5F1A8A0455004F078B /* YelpClient.m */; };
 		EBC24C641A8A06A6004F078B /* RestaurantsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBC24C621A8A06A6004F078B /* RestaurantsViewController.m */; };
 		EBC24C651A8A06A6004F078B /* RestaurantsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBC24C631A8A06A6004F078B /* RestaurantsViewController.xib */; };
+		EBC24C7D1A8C808D004F078B /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = EBC24C7C1A8C808D004F078B /* config.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		EBC24C611A8A06A6004F078B /* RestaurantsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestaurantsViewController.h; sourceTree = "<group>"; };
 		EBC24C621A8A06A6004F078B /* RestaurantsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantsViewController.m; sourceTree = "<group>"; };
 		EBC24C631A8A06A6004F078B /* RestaurantsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RestaurantsViewController.xib; sourceTree = "<group>"; };
+		EBC24C7C1A8C808D004F078B /* config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
 		FD5A5D6D870421BEE061BA38 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -124,6 +126,7 @@
 			children = (
 				EBC24C381A8A01AF004F078B /* Info.plist */,
 				EBC24C391A8A01AF004F078B /* main.m */,
+				EBC24C7C1A8C808D004F078B /* config.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -246,6 +249,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EBC24C7D1A8C808D004F078B /* config.plist in Resources */,
 				EBC24C481A8A01AF004F078B /* LaunchScreen.xib in Resources */,
 				EBC24C451A8A01AF004F078B /* Images.xcassets in Resources */,
 				EBC24C651A8A06A6004F078B /* RestaurantsViewController.xib in Resources */,
