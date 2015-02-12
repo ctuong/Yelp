@@ -10,8 +10,9 @@
 #import "YelpClient.h"
 #import "Business.h"
 #import "BusinessCell.h"
+#import "FiltersViewController.h"
 
-@interface RestaurantsViewController () <UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface RestaurantsViewController () <UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource, FiltersViewControllerDelegate>
 
 @property (nonatomic, strong) YelpClient *client;
 
@@ -23,6 +24,8 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSArray *businesses;
 
+- (void)fetchBusinessesWithQuery:(NSString *)query params:(NSDictionary *)params;
+
 @end
 
 @implementation RestaurantsViewController
@@ -33,20 +36,16 @@
     
     self.client = [[YelpClient alloc] initWithConsumerKey:self.yelpConsumerKey consumerSecret:self.yelpConsumerSecret accessToken:self.yelpToken accessSecret:self.yelpTokenSecret];
     
-    [self.client searchWithTerm:@"Thai" success:^(AFHTTPRequestOperation *operation, id response) {
-//        NSLog(@"response: %@", response);
-        
-        self.businesses = [Business businessesWithDictionaries:response[@"businesses"]];
-        
-        [self.tableView reloadData];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"error: %@", [error description]);
-    }];
+    [self fetchBusinessesWithQuery:@"Restaurants" params:nil];
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.tableView registerNib:[UINib nibWithNibName:@"BusinessCell" bundle:nil] forCellReuseIdentifier:@"BusinessCell"];
     self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = 86;
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Filters" style:UIBarButtonItemStylePlain target:self action:@selector(onFilterButton)];
+    self.navigationItem.leftBarButtonItem.tintColor = [UIColor colorWithWhite:1 alpha:1];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -76,6 +75,35 @@
 }
 
 #pragma mark - UITableViewDelegate methods
+
+#pragma mark - FiltersViewControllerDelegate methods
+
+- (void)filtersViewController:(FiltersViewController *)filtersViewController didChangeFilters:(NSDictionary *)filters {
+    [self fetchBusinessesWithQuery:@"Restaurants" params:filters];
+}
+
+#pragma mark - Private methods
+
+- (void)onFilterButton {
+    FiltersViewController *fvc = [[FiltersViewController alloc] init];
+    fvc.delegate = self;
+    
+    UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:fvc];
+    
+    [self presentViewController:nvc animated:YES completion:nil];
+}
+
+- (void)fetchBusinessesWithQuery:(NSString *)query params:(NSDictionary *)params {
+    [self.client searchWithTerm:query params:params success:^(AFHTTPRequestOperation *operation, id response) {
+        //        NSLog(@"response: %@", response);
+        
+        self.businesses = [Business businessesWithDictionaries:response[@"businesses"]];
+        
+        [self.tableView reloadData];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"error: %@", [error description]);
+    }];
+}
 
 /*
 #pragma mark - Navigation

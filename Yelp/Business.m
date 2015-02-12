@@ -25,6 +25,7 @@
         
         self.name = dictionary[@"name"];
         self.imageURL = dictionary[@"image_url"];
+        // TODO error handling for businesses with no addresses or neighborhoods
         NSString *street = [dictionary valueForKeyPath:@"location.address"][0];
         NSString *neighborhood = [dictionary valueForKeyPath:@"location.neighborhoods"][0];
         self.address = [NSString stringWithFormat:@"%@, %@", street, neighborhood];
