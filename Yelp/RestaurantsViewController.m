@@ -8,8 +8,10 @@
 
 #import "RestaurantsViewController.h"
 #import "YelpClient.h"
+#import "Business.h"
+#import "BusinessCell.h"
 
-@interface RestaurantsViewController () <UISearchBarDelegate>
+@interface RestaurantsViewController () <UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) YelpClient *client;
 
@@ -17,6 +19,9 @@
 @property (nonatomic, strong) NSString *yelpConsumerSecret;
 @property (nonatomic, strong) NSString *yelpToken;
 @property (nonatomic, strong) NSString *yelpTokenSecret;
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) NSArray *businesses;
 
 @end
 
@@ -29,10 +34,19 @@
     self.client = [[YelpClient alloc] initWithConsumerKey:self.yelpConsumerKey consumerSecret:self.yelpConsumerSecret accessToken:self.yelpToken accessSecret:self.yelpTokenSecret];
     
     [self.client searchWithTerm:@"Thai" success:^(AFHTTPRequestOperation *operation, id response) {
-        NSLog(@"response: %@", response);
+//        NSLog(@"response: %@", response);
+        
+        self.businesses = [Business businessesWithDictionaries:response[@"businesses"]];
+        
+        [self.tableView reloadData];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"error: %@", [error description]);
     }];
+    
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    [self.tableView registerNib:[UINib nibWithNibName:@"BusinessCell" bundle:nil] forCellReuseIdentifier:@"BusinessCell"];
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -48,6 +62,20 @@
     self.yelpToken = yelpConfig[@"yelpToken"];
     self.yelpTokenSecret = yelpConfig[@"yelpTokenSecret"];
 }
+
+#pragma mark - UITableViewDataSource methods
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.businesses.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    BusinessCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BusinessCell"];
+    cell.business = self.businesses[indexPath.row];
+    return cell;
+}
+
+#pragma mark - UITableViewDelegate methods
 
 /*
 #pragma mark - Navigation

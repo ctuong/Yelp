@@ -17,6 +17,9 @@
 		EBC24C641A8A06A6004F078B /* RestaurantsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBC24C621A8A06A6004F078B /* RestaurantsViewController.m */; };
 		EBC24C651A8A06A6004F078B /* RestaurantsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBC24C631A8A06A6004F078B /* RestaurantsViewController.xib */; };
 		EBC24C7D1A8C808D004F078B /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = EBC24C7C1A8C808D004F078B /* config.plist */; };
+		EBC24C811A8C85C2004F078B /* Business.m in Sources */ = {isa = PBXBuildFile; fileRef = EBC24C801A8C85C2004F078B /* Business.m */; };
+		EBC24C861A8C8C9D004F078B /* BusinessCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EBC24C841A8C8C9D004F078B /* BusinessCell.m */; };
+		EBC24C871A8C8C9D004F078B /* BusinessCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBC24C851A8C8C9D004F078B /* BusinessCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +51,11 @@
 		EBC24C621A8A06A6004F078B /* RestaurantsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantsViewController.m; sourceTree = "<group>"; };
 		EBC24C631A8A06A6004F078B /* RestaurantsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RestaurantsViewController.xib; sourceTree = "<group>"; };
 		EBC24C7C1A8C808D004F078B /* config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
+		EBC24C7F1A8C85C2004F078B /* Business.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Business.h; sourceTree = "<group>"; };
+		EBC24C801A8C85C2004F078B /* Business.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Business.m; sourceTree = "<group>"; };
+		EBC24C831A8C8C9D004F078B /* BusinessCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessCell.h; sourceTree = "<group>"; };
+		EBC24C841A8C8C9D004F078B /* BusinessCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessCell.m; sourceTree = "<group>"; };
+		EBC24C851A8C8C9D004F078B /* BusinessCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BusinessCell.xib; sourceTree = "<group>"; };
 		FD5A5D6D870421BEE061BA38 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -110,8 +118,10 @@
 		EBC24C361A8A01AF004F078B /* Yelp */ = {
 			isa = PBXGroup;
 			children = (
-				EBC24C661A8A06BE004F078B /* View Controllers */,
+				EBC24C7E1A8C857B004F078B /* Models */,
 				EBC24C5D1A8A03F2004F078B /* API */,
+				EBC24C821A8C8B1D004F078B /* Views */,
+				EBC24C661A8A06BE004F078B /* View Controllers */,
 				EBC24C3B1A8A01AF004F078B /* AppDelegate.h */,
 				EBC24C3C1A8A01AF004F078B /* AppDelegate.m */,
 				EBC24C441A8A01AF004F078B /* Images.xcassets */,
@@ -165,6 +175,25 @@
 				EBC24C631A8A06A6004F078B /* RestaurantsViewController.xib */,
 			);
 			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		EBC24C7E1A8C857B004F078B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				EBC24C7F1A8C85C2004F078B /* Business.h */,
+				EBC24C801A8C85C2004F078B /* Business.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		EBC24C821A8C8B1D004F078B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				EBC24C831A8C8C9D004F078B /* BusinessCell.h */,
+				EBC24C841A8C8C9D004F078B /* BusinessCell.m */,
+				EBC24C851A8C8C9D004F078B /* BusinessCell.xib */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -249,6 +278,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EBC24C871A8C8C9D004F078B /* BusinessCell.xib in Resources */,
 				EBC24C7D1A8C808D004F078B /* config.plist in Resources */,
 				EBC24C481A8A01AF004F078B /* LaunchScreen.xib in Resources */,
 				EBC24C451A8A01AF004F078B /* Images.xcassets in Resources */,
@@ -303,10 +333,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EBC24C811A8C85C2004F078B /* Business.m in Sources */,
 				EBC24C3D1A8A01AF004F078B /* AppDelegate.m in Sources */,
 				EBC24C641A8A06A6004F078B /* RestaurantsViewController.m in Sources */,
 				EBC24C3A1A8A01AF004F078B /* main.m in Sources */,
 				EBC24C601A8A0455004F078B /* YelpClient.m in Sources */,
+				EBC24C861A8C8C9D004F078B /* BusinessCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

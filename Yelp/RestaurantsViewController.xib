@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RestaurantsViewController">
             <connections>
+                <outlet property="tableView" destination="57F-GF-q0H" id="GCa-c0-GgT"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -13,7 +14,19 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="57F-GF-q0H">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </tableView>
+            </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="57F-GF-q0H" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="0PA-Gw-0pB"/>
+                <constraint firstAttribute="bottom" secondItem="57F-GF-q0H" secondAttribute="bottom" id="3vD-qB-k1K"/>
+                <constraint firstAttribute="trailing" secondItem="57F-GF-q0H" secondAttribute="trailing" id="drm-cZ-JFY"/>
+                <constraint firstItem="57F-GF-q0H" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="lN0-OD-viT"/>
+            </constraints>
             <point key="canvasLocation" x="325" y="376"/>
         </view>
     </objects>
