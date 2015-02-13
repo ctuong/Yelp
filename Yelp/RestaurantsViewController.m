@@ -36,16 +36,24 @@
     
     self.client = [[YelpClient alloc] initWithConsumerKey:self.yelpConsumerKey consumerSecret:self.yelpConsumerSecret accessToken:self.yelpToken accessSecret:self.yelpTokenSecret];
     
-    [self fetchBusinessesWithQuery:@"Restaurants" params:nil];
-    
+    // set up the table view
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.tableView registerNib:[UINib nibWithNibName:@"BusinessCell" bundle:nil] forCellReuseIdentifier:@"BusinessCell"];
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 86;
     
+    [self fetchBusinessesWithQuery:@"Restaurants" params:nil];
+    
+    // set up the filters button
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Filters" style:UIBarButtonItemStylePlain target:self action:@selector(onFilterButton)];
     self.navigationItem.leftBarButtonItem.tintColor = [UIColor colorWithWhite:1 alpha:1];
+    
+    // set up the search bar
+    UISearchBar *searchBar = [[UISearchBar alloc] init];
+    [searchBar sizeToFit];
+    searchBar.delegate = self;
+    self.navigationItem.titleView = searchBar;
 }
 
 - (void)didReceiveMemoryWarning {
