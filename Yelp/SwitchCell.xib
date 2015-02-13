@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -14,7 +15,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KCE-ks-uDl">
-                        <rect key="frame" x="8" y="11" width="42" height="21"/>
+                        <rect key="frame" x="8" y="11" width="42" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
@@ -22,19 +23,50 @@
                     <switch opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mKu-Yw-rfE">
                         <rect key="frame" x="263" y="6" width="51" height="31"/>
                     </switch>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dropdown-arrow" translatesAutoresizingMaskIntoConstraints="NO" id="GjF-ml-wvd">
+                        <rect key="frame" x="288" y="17.5" width="14" height="8"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="31" id="TOh-3s-oX2"/>
+                            <constraint firstAttribute="width" constant="45" id="V9W-Wu-fd0"/>
+                            <constraint firstAttribute="height" constant="8" id="ihQ-bS-2nm"/>
+                            <constraint firstAttribute="width" constant="14" id="pcX-L4-Vbf"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="TOh-3s-oX2"/>
+                                <exclude reference="V9W-Wu-fd0"/>
+                            </mask>
+                        </variation>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="mKu-Yw-rfE" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="6" id="0OG-aP-x3o"/>
+                    <constraint firstAttribute="centerY" secondItem="GjF-ml-wvd" secondAttribute="centerY" id="Bv2-2d-7BY"/>
                     <constraint firstAttribute="centerY" secondItem="KCE-ks-uDl" secondAttribute="centerY" id="DKn-E6-FrS"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="GjF-ml-wvd" secondAttribute="trailing" constant="10" id="Efb-ff-WYH"/>
+                    <constraint firstAttribute="trailing" secondItem="GjF-ml-wvd" secondAttribute="trailing" constant="10" id="GVv-wD-XD6"/>
+                    <constraint firstAttribute="bottom" secondItem="GjF-ml-wvd" secondAttribute="bottom" constant="7" id="IcC-1B-mce"/>
                     <constraint firstAttribute="trailing" secondItem="mKu-Yw-rfE" secondAttribute="trailing" constant="8" id="Wn4-bS-Txq"/>
+                    <constraint firstItem="GjF-ml-wvd" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="6" id="eS6-LL-dHN"/>
                     <constraint firstAttribute="bottom" secondItem="mKu-Yw-rfE" secondAttribute="bottom" constant="6.5" id="hMp-og-rDI"/>
                     <constraint firstItem="KCE-ks-uDl" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="lcf-1t-wle"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="GVv-wD-XD6"/>
+                        <exclude reference="IcC-1B-mce"/>
+                        <exclude reference="eS6-LL-dHN"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <connections>
+                <outlet property="dropdownArrowImageView" destination="GjF-ml-wvd" id="diK-uw-e0t"/>
                 <outlet property="titleLabel" destination="KCE-ks-uDl" id="WLo-vT-4rP"/>
                 <outlet property="toggleSwitch" destination="mKu-Yw-rfE" id="r0D-0p-qrc"/>
             </connections>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="dropdown-arrow" width="366" height="180"/>
+    </resources>
 </document>

@@ -24,5 +24,6 @@
 @property (weak, nonatomic) id<SwitchCellDelegate> delegate;
 
 - (void)setOn:(BOOL)on animated:(BOOL)animated;
+- (void)setCollapsed:(BOOL)collapsed;
 
 @end

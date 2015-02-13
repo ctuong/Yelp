@@ -35,6 +35,9 @@
 // whether deals is on or off
 @property (nonatomic, assign) BOOL dealsOn;
 
+@property (nonatomic, assign) BOOL isSortByCollapsed;
+@property (nonatomic, assign) BOOL isDistanceCollapsed;
+
 - (void)initCategories;
 
 @end
@@ -49,6 +52,9 @@
         [self initCategories];
         [self initFilterSections];
         [self initFilterSectionValues];
+        
+        self.isSortByCollapsed = YES;
+        self.isDistanceCollapsed = YES;
     }
     
     return self;
@@ -102,8 +108,7 @@
 #pragma mark - UITableViewDataSource methods
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSArray *valuesInSection = self.filterSectionValues[section];
-    return valuesInSection.count;
+    return [self numberOfRowsInSection:section];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -133,8 +138,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     SwitchCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SwitchCell"];
     
+    // cell formatting
     cell.layer.cornerRadius = 5;
-//    cell.clipsToBounds = YES;
+    cell.clipsToBounds = YES;
     
     // change the default margin of the table divider length
     if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
@@ -147,8 +153,19 @@
         cell.layoutMargins = UIEdgeInsetsZero;
     }
 
-    cell.titleLabel.text = self.filterSectionValues[indexPath.section][indexPath.row];
-    cell.on = [self switchIsOnForCellAtIndexPath:indexPath];
+    if (indexPath.section == kSortBySectionIndex && self.isSortByCollapsed) {
+        cell.titleLabel.text = self.filterSectionValues[indexPath.section][self.selectedSortByIndex];
+        cell.on = YES;
+        [cell setCollapsed:YES];
+    } else if (indexPath.section == kDistanceSectionIndex && self.isDistanceCollapsed) {
+        cell.titleLabel.text = self.filterSectionValues[indexPath.section][self.selectedDistanceIndex];
+        cell.on = YES;
+        [cell setCollapsed:YES];
+    } else {
+        cell.titleLabel.text = self.filterSectionValues[indexPath.section][indexPath.row];
+        cell.on = [self switchIsOnForCellAtIndexPath:indexPath];
+        [cell setCollapsed:NO];
+    }
     cell.delegate = self;
     
     return cell;
@@ -156,36 +173,50 @@
 
 #pragma mark - UITableViewDelegate methods
 
-// for "sort by" or "distance", if the cell was already on, collapse the section
-// if it was off, turn it on, turn the others off, and collapse the section
-// otherwise, turn it off
+// for "sort by" or "distance":
+// - if the section was collapsed, expand it
+// - else if the cell was already on, collapse the section
+// - else if it was off, turn it on, turn the others off, and collapse the section
+// for "deals" or "categories", just turn it off
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     BOOL switchIsOn = [self switchIsOnForCellAtIndexPath:indexPath];
     SwitchCell *currentCell = (SwitchCell *)[tableView cellForRowAtIndexPath:indexPath];
     switch (indexPath.section) {
         case kSortBySectionIndex:
-            if (!switchIsOn) {
-                [currentCell setOn:YES animated:YES];
-                SwitchCell *previouslySelectedCell = (SwitchCell *)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:self.selectedSortByIndex inSection:indexPath.section]];
-                if (previouslySelectedCell) {
-                    // in case the cell was reused
-                    [previouslySelectedCell setOn:NO animated:YES];
+            if (self.isSortByCollapsed) {
+                self.isSortByCollapsed = NO;
+                [self reloadSection:indexPath.section];
+            } else {
+                if (!switchIsOn) {
+                    [currentCell setOn:YES animated:YES];
+                    SwitchCell *previouslySelectedCell = (SwitchCell *)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:self.selectedSortByIndex inSection:indexPath.section]];
+                    if (previouslySelectedCell) {
+                        // in case the cell was reused
+                        [previouslySelectedCell setOn:NO animated:YES];
+                    }
+                    self.selectedSortByIndex = indexPath.row;
                 }
-                self.selectedSortByIndex = indexPath.row;
+                self.isSortByCollapsed = YES;
+                [self reloadSection:indexPath.section];
             }
-            [self collapseSection:indexPath.section];
             break;
         case kDistanceSectionIndex:
-            if (!switchIsOn) {
-                [currentCell setOn:YES animated:YES];
-                SwitchCell *previouslySelectedCell = (SwitchCell *)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:self.selectedDistanceIndex inSection:indexPath.section]];
-                if (previouslySelectedCell) {
-                    // in case the cell was reused
-                    [previouslySelectedCell setOn:NO animated:YES];
+            if (self.isDistanceCollapsed) {
+                self.isDistanceCollapsed = NO;
+                [self reloadSection:indexPath.section];
+            } else {
+                if (!switchIsOn) {
+                    [currentCell setOn:YES animated:YES];
+                    SwitchCell *previouslySelectedCell = (SwitchCell *)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:self.selectedDistanceIndex inSection:indexPath.section]];
+                    if (previouslySelectedCell) {
+                        // in case the cell was reused
+                        [previouslySelectedCell setOn:NO animated:YES];
+                    }
+                    self.selectedDistanceIndex = indexPath.row;
                 }
-                self.selectedDistanceIndex = indexPath.row;
+                self.isDistanceCollapsed = YES;
+                [self reloadSection:indexPath.section];
             }
-            [self collapseSection:indexPath.section];
             break;
         case kDealsSectionIndex:
             [currentCell setOn:!switchIsOn animated:YES];
@@ -211,8 +242,24 @@
 
 #pragma mark - Private methods
 
-- (void)collapseSection:(NSInteger)section {
-    // TODO implement
+- (void)reloadSection:(NSInteger)section {
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationFade];
+}
+
+- (NSInteger)numberOfRowsInSection:(NSInteger)section {
+    switch (section) {
+        case kSortBySectionIndex:
+            if (self.isSortByCollapsed) return 1;
+            return ((NSArray *)self.filterSectionValues[section]).count;
+        case kDistanceSectionIndex:
+            if (self.isDistanceCollapsed) return 1;
+            return ((NSArray *)self.filterSectionValues[section]).count;
+        case kDealsSectionIndex:
+        case kCategoriesSectionIndex:
+            return ((NSArray *)self.filterSectionValues[section]).count;
+        default:
+            return 0;
+    }
 }
 
 - (BOOL)switchIsOnForCellAtIndexPath:(NSIndexPath *)indexPath {

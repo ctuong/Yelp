@@ -11,6 +11,7 @@
 @interface SwitchCell ()
 
 @property (weak, nonatomic) IBOutlet UISwitch *toggleSwitch;
+@property (weak, nonatomic) IBOutlet UIImageView *dropdownArrowImageView;
 
 - (IBAction)switchValueChanged:(id)sender;
 
@@ -43,6 +44,17 @@
 - (void)setOn:(BOOL)on animated:(BOOL)animated {
     _on = on;
     [self.toggleSwitch setOn:on animated:animated];
+}
+
+- (void)setCollapsed:(BOOL)collapsed {
+    // if collapsed, hide the switch and show the dropdown arrow
+    if (collapsed) {
+        self.toggleSwitch.hidden = YES;
+        self.dropdownArrowImageView.hidden = NO;
+    } else {
+        self.dropdownArrowImageView.hidden = YES;
+        self.toggleSwitch.hidden = NO;
+    }
 }
 
 @end
