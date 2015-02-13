@@ -21,7 +21,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="1. Grand Pu Bah" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ijl-Eh-1DU">
-                        <rect key="frame" x="86" y="8" width="183" height="14.5"/>
+                        <rect key="frame" x="86" y="8" width="183" height="15"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
@@ -39,13 +39,13 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thai, Seafood, Salad" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EKa-yu-GFQ">
-                        <rect key="frame" x="86" y="63" width="97.5" height="12"/>
+                        <rect key="frame" x="86" y="62" width="98" height="12"/>
                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="88 Division St., Mission Bay" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FUt-iZ-szR">
-                        <rect key="frame" x="86" y="49" width="130.5" height="12"/>
+                        <rect key="frame" x="86" y="49" width="131" height="12"/>
                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
@@ -58,7 +58,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="469 Reviews" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vnc-xB-lDR">
-                        <rect key="frame" x="175" y="28" width="59.5" height="12"/>
+                        <rect key="frame" x="175" y="28" width="60" height="12"/>
                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
@@ -79,6 +79,8 @@
                     <constraint firstItem="Q2k-m4-XBd" firstAttribute="top" secondItem="ZMe-FJ-uRG" secondAttribute="bottom" constant="4" id="SA7-Xk-Axw"/>
                     <constraint firstAttribute="trailing" secondItem="ZMe-FJ-uRG" secondAttribute="trailing" constant="8" id="UFH-BI-myI"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Ogc-73-6hq" secondAttribute="bottom" constant="8" id="Uie-DI-2eE"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="FUt-iZ-szR" secondAttribute="trailing" constant="8" id="Vjk-53-c1m"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="EKa-yu-GFQ" secondAttribute="trailing" constant="8" id="WyR-Cp-uzv"/>
                     <constraint firstItem="EKa-yu-GFQ" firstAttribute="leading" secondItem="Ogc-73-6hq" secondAttribute="trailing" constant="8" id="ZLc-oy-fNj"/>
                     <constraint firstItem="Ogc-73-6hq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="Zlz-W3-P7M"/>
                     <constraint firstAttribute="trailing" secondItem="Q2k-m4-XBd" secondAttribute="trailing" constant="8" id="Zrx-hN-H56"/>

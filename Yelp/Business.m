@@ -25,10 +25,31 @@
         
         self.name = dictionary[@"name"];
         self.imageURL = dictionary[@"image_url"];
-        // TODO error handling for businesses with no addresses or neighborhoods
-        NSString *street = [dictionary valueForKeyPath:@"location.address"][0];
-        NSString *neighborhood = [dictionary valueForKeyPath:@"location.neighborhoods"][0];
-        self.address = [NSString stringWithFormat:@"%@, %@", street, neighborhood];
+        
+        // parse out the address
+        NSArray *addresses = [dictionary valueForKeyPath:@"location.address"];
+        NSArray *neighborhoods = [dictionary valueForKeyPath:@"location.neighborhoods"];
+        NSString *street;
+        if (addresses.count == 0) {
+            // no addresses
+            street = @"";
+        } else {
+            street = addresses[0];
+        }
+        NSString *neighborhood;
+        if (neighborhoods.count == 0) {
+            // no neighborhoods
+            self.address = street;
+        } else {
+            neighborhood = neighborhoods[0];
+            if (addresses.count > 0) {
+                // there is a street and a neighborhood
+                self.address = [NSString stringWithFormat:@"%@, %@", street, neighborhood];
+            } else {
+                // only a neighborhood, no street
+                self.address = neighborhood;
+            }
+        }
         
         self.numReviews = [dictionary[@"review_count"] integerValue];
         self.ratingImageURL = dictionary[@"rating_img_url"];

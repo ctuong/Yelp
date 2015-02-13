@@ -12,6 +12,7 @@
 
 @protocol SwitchCellDelegate <NSObject>
 
+@optional
 - (void)switchCell:(SwitchCell *)switchCell didUpdateValue:(BOOL)value;
 
 @end
