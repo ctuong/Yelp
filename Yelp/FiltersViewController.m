@@ -8,6 +8,7 @@
 
 #import "FiltersViewController.h"
 #import "SwitchCell.h"
+#import <QuartzCore/QuartzCore.h>
 
 #define kSortBySectionIndex 0
 #define kDistanceSectionIndex 1
@@ -57,13 +58,38 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(onCancelButton)];
+    // set up the title
+    UILabel *titleLabel = [[UILabel alloc] init];
+    titleLabel.text = @"Filters";
+    titleLabel.textColor = [UIColor colorWithWhite:1 alpha:1];
+    [titleLabel sizeToFit];
+    self.navigationItem.titleView = titleLabel;
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Apply" style:UIBarButtonItemStylePlain target:self action:@selector(onApplyButton)];
+    // set up the navigation bar
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:1 green:0 blue:0 alpha:1];
     
+    // set up cancel button
+    UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [cancelButton setTitle:@"Cancel" forState:UIControlStateNormal];
+    cancelButton.titleLabel.font = [UIFont systemFontOfSize:14];
+    cancelButton.tintColor = [UIColor colorWithWhite:1 alpha:1];
+    [cancelButton addTarget:self action:@selector(onCancelButton) forControlEvents:UIControlEventAllTouchEvents];
+    [cancelButton sizeToFit];
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:cancelButton];
+    
+    // set up search button
+    UIButton *searchButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [searchButton setTitle:@"Search" forState:UIControlStateNormal];
+    searchButton.titleLabel.font = [UIFont systemFontOfSize:14];
+    searchButton.tintColor = [UIColor colorWithWhite:1 alpha:1];
+    [searchButton addTarget:self action:@selector(onSearchButton) forControlEvents:UIControlEventAllTouchEvents];
+    [searchButton sizeToFit];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:searchButton];
+    
+    // set up the table view
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    
     [self.tableView registerNib:[UINib nibWithNibName:@"SwitchCell" bundle:nil] forCellReuseIdentifier:@"SwitchCell"];
 }
 
@@ -242,7 +268,7 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)onApplyButton {
+- (void)onSearchButton {
     [self.delegate filtersViewController:self didChangeFilters:self.filters];
     [self dismissViewControllerAnimated:YES completion:nil];
 }

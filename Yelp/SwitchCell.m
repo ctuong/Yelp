@@ -29,6 +29,7 @@
     // Configure the view for the selected state
 }
 
+// not connected
 - (IBAction)switchValueChanged:(id)sender {
     if ([self.delegate respondsToSelector:@selector(switchCell:didUpdateValue:)]) {
         [self.delegate switchCell:self didUpdateValue:self.toggleSwitch.on];

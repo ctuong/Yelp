@@ -24,6 +24,8 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSArray *businesses;
 
+@property (nonatomic, strong) NSString *currentSearchString;
+
 - (void)fetchBusinessesWithQuery:(NSString *)query params:(NSDictionary *)params;
 
 @end
@@ -43,7 +45,8 @@
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 86;
     
-    [self fetchBusinessesWithQuery:@"Restaurants" params:nil];
+    self.currentSearchString = @"Restaurants";
+    [self fetchBusinessesWithQuery:self.currentSearchString params:nil];
     
     // set up the filters button
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Filters" style:UIBarButtonItemStylePlain target:self action:@selector(onFilterButton)];
@@ -70,6 +73,25 @@
     self.yelpTokenSecret = yelpConfig[@"yelpTokenSecret"];
 }
 
+#pragma mark - UISearchBarDelegate methods
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    self.currentSearchString = searchText;
+    [self fetchBusinessesWithQuery:searchText params:nil];
+}
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    searchBar.showsCancelButton = YES;
+}
+
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
+    searchBar.showsCancelButton = NO;
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    [searchBar endEditing:YES];
+}
+
 #pragma mark - UITableViewDataSource methods
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -84,10 +106,18 @@
 
 #pragma mark - UITableViewDelegate methods
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+}
+
 #pragma mark - FiltersViewControllerDelegate methods
 
 - (void)filtersViewController:(FiltersViewController *)filtersViewController didChangeFilters:(NSDictionary *)filters {
-    [self fetchBusinessesWithQuery:@"Restaurants" params:filters];
+    if ([self.currentSearchString length] == 0) {
+        [self fetchBusinessesWithQuery:@"Restaurants" params:filters];
+    } else {
+        [self fetchBusinessesWithQuery:self.currentSearchString params:filters];
+    }
 }
 
 #pragma mark - Private methods
