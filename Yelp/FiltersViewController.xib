@@ -16,15 +16,16 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="QaE-HF-XKl">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <rect key="frame" x="8" y="0.0" width="304" height="568"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <inset key="separatorInset" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
                 </tableView>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="QaE-HF-XKl" secondAttribute="trailing" id="AS5-FA-9KC"/>
+                <constraint firstAttribute="trailing" secondItem="QaE-HF-XKl" secondAttribute="trailing" constant="8" id="AS5-FA-9KC"/>
                 <constraint firstItem="QaE-HF-XKl" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Cdf-7t-M4W"/>
-                <constraint firstItem="QaE-HF-XKl" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Fz0-TK-hKo"/>
+                <constraint firstItem="QaE-HF-XKl" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="Fz0-TK-hKo"/>
                 <constraint firstAttribute="bottom" secondItem="QaE-HF-XKl" secondAttribute="bottom" id="wgP-Ef-Tuu"/>
             </constraints>
             <point key="canvasLocation" x="139" y="154"/>

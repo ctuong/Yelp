@@ -91,6 +91,7 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.tableView registerNib:[UINib nibWithNibName:@"SwitchCell" bundle:nil] forCellReuseIdentifier:@"SwitchCell"];
+    self.tableView.showsVerticalScrollIndicator = NO;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -131,6 +132,20 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     SwitchCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SwitchCell"];
+    
+    cell.layer.cornerRadius = 5;
+//    cell.clipsToBounds = YES;
+    
+    // change the default margin of the table divider length
+    if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
+        cell.preservesSuperviewLayoutMargins = NO;
+    }
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        cell.separatorInset = UIEdgeInsetsMake(0, 3, 0, 3);
+    }
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        cell.layoutMargins = UIEdgeInsetsZero;
+    }
 
     cell.titleLabel.text = self.filterSectionValues[indexPath.section][indexPath.row];
     cell.on = [self switchIsOnForCellAtIndexPath:indexPath];
