@@ -15,6 +15,9 @@
 #define kDealsSectionIndex 2
 #define kCategoriesSectionIndex 3
 
+// this must be less than the total number of categories available
+#define kInitialNumCategories 1
+
 @interface FiltersViewController () <UITableViewDataSource, UITableViewDelegate, SwitchCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -37,6 +40,7 @@
 
 @property (nonatomic, assign) BOOL isSortByCollapsed;
 @property (nonatomic, assign) BOOL isDistanceCollapsed;
+@property (nonatomic, assign) BOOL isCategoryListExpanded;
 
 - (void)initCategories;
 
@@ -55,6 +59,7 @@
         
         self.isSortByCollapsed = YES;
         self.isDistanceCollapsed = YES;
+        self.isCategoryListExpanded = NO;
     }
     
     return self;
@@ -161,6 +166,9 @@
         cell.titleLabel.text = self.filterSectionValues[indexPath.section][self.selectedDistanceIndex];
         cell.on = YES;
         [cell setCollapsed:YES];
+    } else if ([self indexPathIsShowAllCategories:indexPath]) {
+        cell.titleLabel.text = @"Show All";
+        [cell showLabelOnly];
     } else {
         cell.titleLabel.text = self.filterSectionValues[indexPath.section][indexPath.row];
         cell.on = [self switchIsOnForCellAtIndexPath:indexPath];
@@ -223,11 +231,17 @@
             self.dealsOn = !switchIsOn;
             break;
         case kCategoriesSectionIndex:
-            [currentCell setOn:!switchIsOn animated:YES];
-            if (!switchIsOn) {
-                [self.selectedCategories addObject:self.categories[indexPath.row]];
+            if ([self indexPathIsShowAllCategories:indexPath]) {
+                // pressed the "Show All" cell
+                self.isCategoryListExpanded = YES;
+                [self reloadSection:indexPath.section];
             } else {
-                [self.selectedCategories removeObject:self.categories[indexPath.row]];
+                [currentCell setOn:!switchIsOn animated:YES];
+                if (!switchIsOn) {
+                    [self.selectedCategories addObject:self.categories[indexPath.row]];
+                } else {
+                    [self.selectedCategories removeObject:self.categories[indexPath.row]];
+                }
             }
             break;
         default:
@@ -255,11 +269,19 @@
             if (self.isDistanceCollapsed) return 1;
             return ((NSArray *)self.filterSectionValues[section]).count;
         case kDealsSectionIndex:
-        case kCategoriesSectionIndex:
             return ((NSArray *)self.filterSectionValues[section]).count;
+        case kCategoriesSectionIndex:
+            if (self.isCategoryListExpanded) {
+                return ((NSArray *)self.filterSectionValues[section]).count;
+            }
+            return kInitialNumCategories + 1; // 1 extra for "Show All" cell
         default:
             return 0;
     }
+}
+
+- (BOOL)indexPathIsShowAllCategories:(NSIndexPath *)indexPath {
+    return !self.isCategoryListExpanded && indexPath.section == kCategoriesSectionIndex && indexPath.row == kInitialNumCategories;
 }
 
 - (BOOL)switchIsOnForCellAtIndexPath:(NSIndexPath *)indexPath {

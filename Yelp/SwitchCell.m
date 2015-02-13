@@ -57,4 +57,9 @@
     }
 }
 
+- (void)showLabelOnly {
+    self.toggleSwitch.hidden = YES;
+    self.dropdownArrowImageView.hidden = YES;
+}
+
 @end

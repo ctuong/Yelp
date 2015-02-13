@@ -25,5 +25,6 @@
 
 - (void)setOn:(BOOL)on animated:(BOOL)animated;
 - (void)setCollapsed:(BOOL)collapsed;
+- (void)showLabelOnly;
 
 @end

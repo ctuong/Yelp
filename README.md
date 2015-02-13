@@ -30,7 +30,7 @@ You must create a config.plist file with the keys `yelpConsumerKey`, `yelpConsum
 - [ ] Filter page
    - [ ] Custom switch
    - [x] Sort by and distance filters expand and collapse as in the real Yelp app
-   - [ ] Categories should show a subset of the full list with a "See All" row to expand. Category list is [here](http://www.yelp.com/developers/documentation/category_list)
+   - [x] Categories shows a subset of the full list with a "Show All" row to expand
 - [ ] Implement the restaurant detail page.
 
 ### Walkthrough
