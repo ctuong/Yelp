@@ -153,7 +153,7 @@
     if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
         cell.layoutMargins = UIEdgeInsetsZero;
     }
-
+    
     if (indexPath.section == kSortBySectionIndex && self.isSortByCollapsed) {
         cell.titleLabel.text = self.filterSectionValues[indexPath.section][self.selectedSortByIndex];
         cell.on = YES;
@@ -354,11 +354,107 @@
 }
 
 - (void)initCategories {
-    // TODO input all categories
+    //    self.categories =
+    //    @[@{@"name" : @"Afghan", @"code": @"afghani" },
+    //      @{@"name" : @"African", @"code": @"african" },
+    //      @{@"name" : @"American, New", @"code": @"newamerican" }];
     self.categories =
     @[@{@"name" : @"Afghan", @"code": @"afghani" },
       @{@"name" : @"African", @"code": @"african" },
-      @{@"name" : @"American, New", @"code": @"newamerican" }];
+      @{@"name" : @"American, New", @"code": @"newamerican" },
+      @{@"name" : @"American, Traditional", @"code": @"tradamerican" },
+      @{@"name" : @"Argentine", @"code": @"argentine" },
+      @{@"name" : @"Asian Fusion", @"code": @"asianfusion" },
+      @{@"name" : @"Australian", @"code": @"australian" },
+      @{@"name" : @"Austrian", @"code": @"austrian" },
+      @{@"name" : @"Barbeque", @"code": @"bbq" },
+      @{@"name" : @"Basque", @"code": @"basque" },
+      @{@"name" : @"Belgian", @"code": @"belgian" },
+      @{@"name" : @"Bistros", @"code": @"bistros" },
+      @{@"name" : @"Brasseries", @"code": @"brasseries" },
+      @{@"name" : @"Brazilian", @"code": @"brazilian" },
+      @{@"name" : @"Breakfast & Brunch", @"code": @"breakfast_brunch" },
+      @{@"name" : @"British", @"code": @"british" },
+      @{@"name" : @"Buffets", @"code": @"buffets" },
+      @{@"name" : @"Burgers", @"code": @"burgers" },
+      @{@"name" : @"Burmese", @"code": @"burmese" },
+      @{@"name" : @"Cafes", @"code": @"cafes" },
+      @{@"name" : @"Cafeteria", @"code": @"cafeteria" },
+      @{@"name" : @"Cajun/Creole", @"code": @"cajun" },
+      @{@"name" : @"Cambodian", @"code": @"cambodian" },
+      @{@"name" : @"Caribbean", @"code": @"caribbean" },
+      @{@"name" : @"Chilean", @"code": @"chilean" },
+      @{@"name" : @"Chinese", @"code": @"chinese" },
+      @{@"name" : @"Comfort Food", @"code": @"comfortfood" },
+      @{@"name" : @"Creperies", @"code": @"creperies" },
+      @{@"name" : @"Cuban", @"code": @"cuban" },
+      @{@"name" : @"Czech/Slovakian", @"code": @"czechslovakian" },
+      @{@"name" : @"Danish", @"code": @"danish" },
+      @{@"name" : @"Delis", @"code": @"delis" },
+      @{@"name" : @"Diners", @"code": @"diners" },
+      @{@"name" : @"Ethiopian", @"code": @"ethiopian" },
+      @{@"name" : @"Fast Food", @"code": @"hotdogs" },
+      @{@"name" : @"Filipino", @"code": @"filipino" },
+      @{@"name" : @"Fondue", @"code": @"fondue" },
+      @{@"name" : @"Food Court", @"code": @"food_court" },
+      @{@"name" : @"Food Stands", @"code": @"foodstands" },
+      @{@"name" : @"French", @"code": @"french" },
+      @{@"name" : @"Gastropubs", @"code": @"gastropubs" },
+      @{@"name" : @"German", @"code": @"german" },
+      @{@"name" : @"Greek", @"code": @"greek" },
+      @{@"name" : @"Halal", @"code": @"halal" },
+      @{@"name" : @"Hawaiian", @"code": @"hawaiian" },
+      @{@"name" : @"Himalayan/Nepalese", @"code": @"himalayan" },
+      @{@"name" : @"Hot Pot", @"code": @"hotpot" },
+      @{@"name" : @"Indian", @"code": @"indpak" },
+      @{@"name" : @"Indonesian", @"code": @"indonesian" },
+      @{@"name" : @"International", @"code": @"international" },
+      @{@"name" : @"Irish", @"code": @"irish" },
+      @{@"name" : @"Israeli", @"code": @"israeli" },
+      @{@"name" : @"Italian", @"code": @"italian" },
+      @{@"name" : @"Japanese", @"code": @"japanese" },
+      @{@"name" : @"Jewish", @"code": @"jewish" },
+      @{@"name" : @"Kebab", @"code": @"kebab" },
+      @{@"name" : @"Korean", @"code": @"korean" },
+      @{@"name" : @"Kosher", @"code": @"kosher" },
+      @{@"name" : @"Laotian", @"code": @"laotian" },
+      @{@"name" : @"Latin American", @"code": @"latin" },
+      @{@"name" : @"Live/Raw Food", @"code": @"raw_food" },
+      @{@"name" : @"Malaysian", @"code": @"malaysian" },
+      @{@"name" : @"Mediterranean", @"code": @"mediterranean" },
+      @{@"name" : @"Mexican", @"code": @"mexican" },
+      @{@"name" : @"Mongolian", @"code": @"mongolian" },
+      @{@"name" : @"Moroccan", @"code": @"moroccan" },
+      @{@"name" : @"New Zealand", @"code": @"newzealand" },
+      @{@"name" : @"Night Food", @"code": @"nightfood" },
+      @{@"name" : @"Pakistani", @"code": @"pakistani" },
+      @{@"name" : @"Persian/Iranian", @"code": @"persian" },
+      @{@"name" : @"Peruvian", @"code": @"peruvian" },
+      @{@"name" : @"Pizza", @"code": @"pizza" },
+      @{@"name" : @"Polish", @"code": @"polish" },
+      @{@"name" : @"Portuguese", @"code": @"portuguese" },
+      @{@"name" : @"Romanian", @"code": @"romanian" },
+      @{@"name" : @"Russian", @"code": @"russian" },
+      @{@"name" : @"Salad", @"code": @"salad" },
+      @{@"name" : @"Sandwiches", @"code": @"sandwiches" },
+      @{@"name" : @"Scandinavian", @"code": @"scandinavian" },
+      @{@"name" : @"Scottish", @"code": @"scottish" },
+      @{@"name" : @"Seafood", @"code": @"seafood" },
+      @{@"name" : @"Singaporean", @"code": @"singaporean" },
+      @{@"name" : @"Soul Food", @"code": @"soulfood" },
+      @{@"name" : @"Spanish", @"code": @"spanish" },
+      @{@"name" : @"Steakhouses", @"code": @"steak" },
+      @{@"name" : @"Sushi Bars", @"code": @"sushi" },
+      @{@"name" : @"Swedish", @"code": @"swedish" },
+      @{@"name" : @"Swiss Food", @"code": @"swissfood" },
+      @{@"name" : @"Taiwanese", @"code": @"taiwanese" },
+      @{@"name" : @"Tapas Bars", @"code": @"tapas" },
+      @{@"name" : @"Thai", @"code": @"thai" },
+      @{@"name" : @"Turkish", @"code": @"turkish" },
+      @{@"name" : @"Vegan", @"code": @"vegan" },
+      @{@"name" : @"Vegetarian", @"code": @"vegetarian" },
+      @{@"name" : @"Venison", @"code": @"venison" },
+      @{@"name" : @"Vietnamese", @"code": @"vietnamese" }];
 }
 
 - (void)initFilterSections {
@@ -374,8 +470,11 @@
 }
 
 - (NSArray *)getCategoryNames {
-    // TODO should be synced up with categories
-    return @[@"Afghan", @"African", @"American"];
+    NSMutableArray *names = [NSMutableArray arrayWithCapacity:self.categories.count];
+    [self.categories enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        [names addObject:obj[@"name"]];
+    }];
+    return names;
 }
 
 /*

@@ -2,7 +2,7 @@
 
 This is a Yelp search app using the [Yelp API](http://developer.rottentomatoes.com/docs/read/JSON).
 
-Time spent: `<Number of hours spent>`
+Time spent: `11.5 hours`
 
 ### Setup
 You must create a config.plist file with the keys `yelpConsumerKey`, `yelpConsumerSecret`, `yelpToken`, and `yelpTokenSecret` and the proper values to access the Yelp API.
@@ -24,8 +24,8 @@ You must create a config.plist file with the keys `yelpConsumerKey`, `yelpConsum
 
 #### Optional
 
-- [ ] Search results page
-   - [ ] Infinite scroll for restaurant results
+- [x] Search results page
+   - [x] Infinite scroll for restaurant results
    - [x] Implement map view of restaurant results
 - [x] Filter page
    - [ ] Use a custom switch
