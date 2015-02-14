@@ -32,6 +32,7 @@
 @property (nonatomic, strong) NSString *currentSearchString;
 @property (nonatomic, strong) NSNumber *currentSearchLimit;
 @property (nonatomic, strong) NSNumber *currentSearchOffset;
+// save the current filters for infinite loading
 @property (nonatomic, strong) NSDictionary *currentFilters;
 
 - (void)fetchBusinessesWithQuery:(NSString *)query params:(NSDictionary *)params;
@@ -59,6 +60,7 @@
     self.currentSearchString = @"Restaurants";
     self.currentSearchLimit = @20;
     self.currentSearchOffset = @0;
+    self.currentFilters = [NSDictionary dictionary];
     [self fetchBusinessesWithQuery:self.currentSearchString params:nil];
     
     // set up the filters button
@@ -93,6 +95,7 @@
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     self.currentSearchString = searchText;
+    // typing a search term doesn't use the filters
     [self fetchBusinessesWithQuery:searchText params:nil];
 }
 
@@ -158,6 +161,8 @@
 #pragma mark - FiltersViewControllerDelegate methods
 
 - (void)filtersViewController:(FiltersViewController *)filtersViewController didChangeFilters:(NSDictionary *)filters {
+    self.currentFilters = filters;
+    
     if ([self.currentSearchString length] == 0) {
         [self fetchBusinessesWithQuery:@"Restaurants" params:filters];
     } else {
@@ -231,7 +236,11 @@
     // remove the annotations from the map before doing the search
     [self clearMapView];
     
-    [self.client searchWithTerm:query params:params success:^(AFHTTPRequestOperation *operation, id response) {
+    [self.client searchWithTerm:query
+                         params:params
+                          limit:self.currentSearchLimit
+                         offset:self.currentSearchOffset
+                        success:^(AFHTTPRequestOperation *operation, id response) {
 //        NSLog(@"region: %@", response[@"region"]);
 //        NSLog(@"business: %@", response[@"businesses"][0]);
         
