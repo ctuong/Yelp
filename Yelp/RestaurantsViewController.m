@@ -12,6 +12,7 @@
 #import "BusinessCell.h"
 #import "FiltersViewController.h"
 #import "SVProgressHUD.h"
+#import <UIScrollView+SVInfiniteScrolling.h>
 #import <MapKit/MapKit.h>
 #import <UIImageView+AFNetworking.h>
 
@@ -30,8 +31,8 @@
 @property (nonatomic, assign) MKCoordinateRegion mapRegion;
 
 @property (nonatomic, strong) NSString *currentSearchString;
-@property (nonatomic, strong) NSNumber *currentSearchLimit;
-@property (nonatomic, strong) NSNumber *currentSearchOffset;
+@property (nonatomic, assign) NSInteger currentSearchLimit;
+@property (nonatomic, assign) NSInteger currentSearchOffset;
 // save the current filters for infinite loading
 @property (nonatomic, strong) NSDictionary *currentFilters;
 
@@ -53,13 +54,34 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"BusinessCell" bundle:nil] forCellReuseIdentifier:@"BusinessCell"];
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 86;
+    [self.tableView addInfiniteScrollingWithActionHandler:^{
+        self.currentSearchOffset += self.currentSearchLimit;
+        
+        [self.client searchWithTerm:self.currentSearchString
+                             params:self.currentFilters
+                              limit:@(self.currentSearchLimit)
+                             offset:@(self.currentSearchOffset)
+                            success:^(AFHTTPRequestOperation *operation, id response) {
+                                NSArray *newBusinesses = [Business businessesWithDictionaries:response[@"businesses"]];
+                                if (newBusinesses.count > 0) {
+                                    self.businesses = [self.businesses arrayByAddingObjectsFromArray:newBusinesses];
+                                    self.mapRegion = [self regionFromDictionary:response[@"region"]];
+                                    
+                                    [self.tableView reloadData];
+                                    [self updateMapViewWithRegion:self.mapRegion businesses:newBusinesses];
+                                }
+                                [self.tableView.infiniteScrollingView stopAnimating];
+                            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                NSLog(@"error: %@", [error description]);
+                            }];
+    }];
     
     // set up the map view
     self.mapView.delegate = self;
     
     self.currentSearchString = @"Restaurants";
-    self.currentSearchLimit = @20;
-    self.currentSearchOffset = @0;
+    self.currentSearchLimit = 20;
+    self.currentSearchOffset = 0;
     self.currentFilters = [NSDictionary dictionary];
     [self fetchBusinessesWithQuery:self.currentSearchString params:nil];
     
@@ -211,10 +233,10 @@
     self.navigationItem.rightBarButtonItem.tintColor = [UIColor colorWithWhite:1 alpha:1];
 }
 
-- (void)updateMapView {
-    self.mapView.region = self.mapRegion;
+- (void)updateMapViewWithRegion:(MKCoordinateRegion)region businesses:(NSArray *)businesses {
+    self.mapView.region = region;
     
-    [self.mapView addAnnotations:self.businesses];
+    [self.mapView addAnnotations:businesses];
 }
 
 - (MKCoordinateRegion)regionFromDictionary:(NSDictionary *)dictionary {
@@ -233,27 +255,27 @@
     [SVProgressHUD setBackgroundColor:[UIColor clearColor]];
     [SVProgressHUD show];
     
+    // reset the search offset
+    self.currentSearchOffset = 0;
+    
     // remove the annotations from the map before doing the search
     [self clearMapView];
     
     [self.client searchWithTerm:query
                          params:params
-                          limit:self.currentSearchLimit
-                         offset:self.currentSearchOffset
+                          limit:@(self.currentSearchLimit)
+                         offset:@(self.currentSearchOffset)
                         success:^(AFHTTPRequestOperation *operation, id response) {
-//        NSLog(@"region: %@", response[@"region"]);
-//        NSLog(@"business: %@", response[@"businesses"][0]);
-        
-        self.businesses = [Business businessesWithDictionaries:response[@"businesses"]];
-        self.mapRegion = [self regionFromDictionary:response[@"region"]];
-        
-        [self.tableView reloadData];
-        [self updateMapView];
-        [SVProgressHUD dismiss];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"error: %@", [error description]);
-        [SVProgressHUD dismiss];
-    }];
+                            self.businesses = [Business businessesWithDictionaries:response[@"businesses"]];
+                            self.mapRegion = [self regionFromDictionary:response[@"region"]];
+                            
+                            [self.tableView reloadData];
+                            [self updateMapViewWithRegion:self.mapRegion businesses:self.businesses];
+                            [SVProgressHUD dismiss];
+                        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                            NSLog(@"error: %@", [error description]);
+                            [SVProgressHUD dismiss];
+                        }];
 }
 
 /*

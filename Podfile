@@ -1,3 +1,4 @@
 pod 'AFNetworking'
 pod 'BDBOAuth1Manager'
-pod "SVProgressHUD"
+pod 'SVProgressHUD'
+pod 'SVPullToRefresh'
