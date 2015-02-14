@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B42A7D34CEC802C6C00B55C3 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD5A5D6D870421BEE061BA38 /* libPods.a */; };
+		EB6D96C11A8EF662000B8875 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB6D96C01A8EF662000B8875 /* MapKit.framework */; };
 		EBC24C3A1A8A01AF004F078B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EBC24C391A8A01AF004F078B /* main.m */; };
 		EBC24C3D1A8A01AF004F078B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EBC24C3C1A8A01AF004F078B /* AppDelegate.m */; };
 		EBC24C451A8A01AF004F078B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBC24C441A8A01AF004F078B /* Images.xcassets */; };
@@ -39,6 +40,7 @@
 /* Begin PBXFileReference section */
 		36158131E550DDC6A7136948 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		CDE2BCD1E93BC3A07B58C56E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		EB6D96C01A8EF662000B8875 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		EBC24C341A8A01AF004F078B /* Yelp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Yelp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBC24C381A8A01AF004F078B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EBC24C391A8A01AF004F078B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB6D96C11A8EF662000B8875 /* MapKit.framework in Frameworks */,
 				B42A7D34CEC802C6C00B55C3 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -100,6 +103,7 @@
 		82E3C6173031419009AE8211 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EB6D96C01A8EF662000B8875 /* MapKit.framework */,
 				FD5A5D6D870421BEE061BA38 /* libPods.a */,
 			);
 			name = Frameworks;

@@ -42,7 +42,7 @@
     _business = business;
     
     [self.thumbnailImageView setImageWithURL:[NSURL URLWithString:self.business.imageURL]];
-    self.nameLabel.text = self.business.name;
+    self.nameLabel.text = [NSString stringWithFormat:@"%ld. %@", (long)self.row, self.business.name];
     [self.ratingImageView setImageWithURL:[NSURL URLWithString:self.business.ratingImageURL]];
     self.numReviewsLabel.text = [NSString stringWithFormat:@"%ld Reviews", self.business.numReviews];
     self.addressLabel.text = self.business.address;

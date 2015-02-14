@@ -26,9 +26,9 @@ You must create a config.plist file with the keys `yelpConsumerKey`, `yelpConsum
 
 - [ ] Search results page
    - [ ] Infinite scroll for restaurant results
-   - [ ] Implement map view of restaurant results
-- [ ] Filter page
-   - [ ] Custom switch
+   - [x] Implement map view of restaurant results
+- [x] Filter page
+   - [ ] Use a custom switch
    - [x] Sort by and distance filters expand and collapse as in the real Yelp app
    - [x] Categories shows a subset of the full list with a "Show All" row to expand
 - [ ] Implement the restaurant detail page.

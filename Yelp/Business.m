@@ -10,6 +10,15 @@
 
 #define kMilesPerMeter 0.000621371
 
+@interface Business ()
+
+@property (nonatomic, assign) double latitude;
+@property (nonatomic, assign) double longitude;
+
+@property (nonatomic, strong) NSString *displayPhone;
+
+@end
+
 @implementation Business
 
 - (id)initWithDictionary:(NSDictionary *)dictionary {
@@ -54,6 +63,10 @@
         self.numReviews = [dictionary[@"review_count"] integerValue];
         self.ratingImageURL = dictionary[@"rating_img_url"];
         self.distance = [dictionary[@"distance"] integerValue] * kMilesPerMeter;
+        self.displayPhone = dictionary[@"display_phone"];
+        
+        self.latitude = [[dictionary valueForKeyPath:@"location.coordinate.latitude"] doubleValue];
+        self.longitude = [[dictionary valueForKeyPath:@"location.coordinate.longitude"] doubleValue];
     }
     
     return self;
@@ -68,6 +81,20 @@
     }
     
     return businesses;
+}
+
+#pragma mark - MKAnnotation methods
+
+- (CLLocationCoordinate2D)coordinate {
+    return CLLocationCoordinate2DMake(self.latitude, self.longitude);
+}
+
+- (NSString *)title {
+    return self.name;
+}
+
+- (NSString *)subtitle {
+    return self.displayPhone;
 }
 
 @end

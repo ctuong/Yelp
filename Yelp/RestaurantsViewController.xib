@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RestaurantsViewController">
             <connections>
+                <outlet property="mapView" destination="boq-6u-d8R" id="MmM-fr-HbY"/>
                 <outlet property="tableView" destination="57F-GF-q0H" id="GCa-c0-GgT"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -19,11 +20,18 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
+                <mapView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="boq-6u-d8R">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                </mapView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="boq-6u-d8R" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="1SA-nj-ZAL"/>
                 <constraint firstAttribute="trailing" secondItem="57F-GF-q0H" secondAttribute="trailing" id="7Rg-vb-RjH"/>
                 <constraint firstItem="57F-GF-q0H" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="9Bw-O6-b5X"/>
+                <constraint firstAttribute="bottom" secondItem="boq-6u-d8R" secondAttribute="bottom" id="Pij-Jq-eFE"/>
+                <constraint firstItem="boq-6u-d8R" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="X8E-Bl-7sg"/>
+                <constraint firstAttribute="trailing" secondItem="boq-6u-d8R" secondAttribute="trailing" id="bkX-kZ-DiB"/>
                 <constraint firstItem="57F-GF-q0H" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="cBn-My-xmq"/>
                 <constraint firstAttribute="bottom" secondItem="57F-GF-q0H" secondAttribute="bottom" id="pZi-tq-vti"/>
             </constraints>

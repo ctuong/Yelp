@@ -12,5 +12,6 @@
 @interface BusinessCell : UITableViewCell
 
 @property (nonatomic, strong) Business *business;
+@property (nonatomic, assign) NSInteger row;
 
 @end
