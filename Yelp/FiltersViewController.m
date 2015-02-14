@@ -16,7 +16,7 @@
 #define kCategoriesSectionIndex 3
 
 // this must be less than the total number of categories available
-#define kInitialNumCategories 1
+#define kInitialNumCategories 5
 
 @interface FiltersViewController () <UITableViewDataSource, UITableViewDelegate, SwitchCellDelegate>
 

@@ -35,4 +35,4 @@ You must create a config.plist file with the keys `yelpConsumerKey`, `yelpConsum
 
 ### Walkthrough
 
-![Video Walkthrough](...)
+![Video Walkthrough](yelp.gif)
