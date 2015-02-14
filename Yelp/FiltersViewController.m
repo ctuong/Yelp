@@ -143,10 +143,6 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     SwitchCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SwitchCell"];
     
-    // cell formatting
-    cell.layer.cornerRadius = 5;
-    cell.clipsToBounds = YES;
-    
     // change the default margin of the table divider length
     if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
         cell.preservesSuperviewLayoutMargins = NO;
