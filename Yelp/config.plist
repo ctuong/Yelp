@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>yelpConsumerKey</key>
+	<string>vxKwwcR_NMQ7WaEiQBK_CA</string>
+	<key>yelpConsumerSecret</key>
+	<string>33QCvh5bIF5jIHR5klQr7RtBDhQ</string>
+	<key>yelpToken</key>
+	<string>uRcRswHFYa1VkDrGV6LAW2F8clGh5JHV</string>
+	<key>yelpTokenSecret</key>
+	<string>mqtKIxMIR4iBtBPZCmCLEb-Dz3Y</string>
+</dict>
+</plist>
